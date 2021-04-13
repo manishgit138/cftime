@@ -112,7 +112,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             ${{ env.img }} \
-            bash -exc 'conda create --name TEST python=${{ env.py }} --file requirements.txt --file requirements-dev.txt && \
+            bash -exc `conda create --name TEST python=${{ env.py }} --file requirements.txt --file requirements-dev.txt && \
             source activate TEST && \
             #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
             pip install -v -e  . --no-deps --force-reinstall && \
