@@ -11,8 +11,8 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.7", "3.8", "3.9"]
-        os: [windows-latest, ubuntu-latest, macos-latest]
-        platform: [x64, x32]
+        os: [ubuntu-latest]
+        platform: [x64]
 #  debug on a single os/platform/python version
 #       python-version: [ "3.9"]
 #       os: [ubuntu-latest]
@@ -104,7 +104,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
-          bash -exc `${{ env.py }} -m wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
+          bash -exc `wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
           MINICONDA_PATH=/home/travis/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH`
