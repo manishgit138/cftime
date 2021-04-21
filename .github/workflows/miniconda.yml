@@ -105,7 +105,7 @@ jobs:
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -exc `wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
-          chmod +x miniconda.sh && ./miniconda.sh
+          chmod +x miniconda.sh && ./miniconda.sh`
     - name: Setup Conda Env
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
