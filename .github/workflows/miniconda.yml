@@ -107,11 +107,11 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
-          bash -exc `wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
+          bash -exc 'wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
           export MINICONDA_PATH=/root/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH && \
-          conda create -n testenv --yes python=3.8 pip`
+          conda create -n testenv --yes python=3.8 pip'
     - name: Setup Conda Env
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
