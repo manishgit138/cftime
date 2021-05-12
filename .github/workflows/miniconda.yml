@@ -114,8 +114,11 @@ jobs:
           export PATH=$MINICONDA_PATH/bin:$PATH && \
           conda create --name TEST python=3.6 --file requirements.txt --file requirements-dev.txt && \
           source activate TEST && \
+          #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
+          pip install -v -e  . --no-deps --force-reinstall && \
           conda info --all && \
-          conda list'
+          conda list && \
+          py.test -vv test'
     - name: Setup Conda Env
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
