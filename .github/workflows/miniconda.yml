@@ -100,9 +100,6 @@ jobs:
     - name: Set up QEMU
       id: qemu
       uses: docker/setup-qemu-action@v1
-    - name: arch
-      run: |
-        uname -m
     - name: Setup Conda
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
@@ -112,7 +109,7 @@ jobs:
           export MINICONDA_PATH=/root/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH && \
-          conda create --name TEST python=3.6 --file requirements.txt --file requirements-dev.txt && \
+          conda create --name TEST python=/opt/python/${{ matrix.pyver }}/bin/python --file requirements.txt --file requirements-dev.txt && \
           source activate TEST && \
           #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
           pip install -v -e  . --no-deps --force-reinstall && \
