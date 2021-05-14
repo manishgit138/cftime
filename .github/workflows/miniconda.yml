@@ -109,7 +109,8 @@ jobs:
           export MINICONDA_PATH=/root/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH && \
-          conda create --name TEST python=3.7 --file requirements.txt --file requirements-dev.txt && \
+          export Version= ${{ matrix.pyver }} && \
+          conda create --name TEST python=${python:2:1}.${python:3:1} --file requirements.txt --file requirements-dev.txt && \
           source activate TEST && \
           #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
           pip install -v -e  . --no-deps --force-reinstall && \
@@ -125,21 +126,22 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             ${{ env.img }} \
-            bash -exc `conda create --name TEST python=${{ env.py }} --file requirements.txt --file requirements-dev.txt && \
-            source activate TEST && \
+            bash -exc 'export Version= ${{ matrix.pyver }} && \
+            conda create --name TEST1 python=${python:2:1}.${python:3:1} --file requirements.txt --file requirements-dev.txt && \
+            source activate TEST1 && \
             #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
             pip install -v -e  . --no-deps --force-reinstall && \
-            conda info --all && conda list`
+            conda info --all && conda list'
     - name: Run Tests
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             ${{ env.img }} \
-            bash -exc 'source activate TEST && py.test -vv test`
+            bash -exc 'source activate TEST1 && py.test -vv test && deactivate`
     - name: Tarball
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             ${{ env.img }} \
-            bash -exc 'source activate TEST && 
+            bash -exc 'source activate TEST1 && 
             python setup.py --version && \
             pip wheel . -w dist --no-deps && \
-            check-manifest --verbose && twine check dist/*'
+            check-manifest --verbose && twine check dist/* && deactivate'
