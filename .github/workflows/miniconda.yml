@@ -119,6 +119,7 @@ jobs:
           python setup.py --version && \
           pip wheel . -w dist --no-deps && \
           check-manifest --verbose && \
+          pip install readme-renderer && \
           twine check dist/*'
     - name: Setup Conda Env
       run: |
