@@ -109,7 +109,7 @@ jobs:
           export MINICONDA_PATH=/root/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH && \
-          conda create --name TEST python=${matrix.pyver:2:1.${matrix.pyver:3:1}} --file requirements.txt --file requirements-dev.txt && \
+          conda create --name TEST python=${matrix.pyver:2:1.matrix.pyver:3:1} --file requirements.txt --file requirements-dev.txt && \
           source activate TEST && \
           #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
           pip install -v -e  . --no-deps --force-reinstall && \
