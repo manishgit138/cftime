@@ -106,7 +106,8 @@ jobs:
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -exc 'yum install -y wget && \
-          echo ${python-version}
+          echo ${{ env.python-version }} && \
+          echo ${python-version} && \
           echo "/opt/python/"${matrix.pyver}"/bin/python"
           wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
           export MINICONDA_PATH=/root/miniconda && \
