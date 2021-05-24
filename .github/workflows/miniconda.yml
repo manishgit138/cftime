@@ -108,17 +108,14 @@ jobs:
           bash -exc 'yum install -y wget && \
           echo ${{ env.python-version }} && \
           export Python=${{ env.python-version }} && \
-          export version=${env.python-version:2:1} && \
-          echo ${version} && \
           export Version=${Python:2:1}.${Python:3:1} && \
           echo ${Version} && \
           echo ${python-version} && \
-          echo "/opt/python/${matrix.pyver}/bin/python" && \
           wget https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh -O miniconda.sh && \
           export MINICONDA_PATH=/root/miniconda && \
           chmod +x miniconda.sh && ./miniconda.sh -b -p $MINICONDA_PATH && \
           export PATH=$MINICONDA_PATH/bin:$PATH && \
-          conda create --name TEST python=/opt/python/${matrix.pyver}/bin/python --file requirements.txt --file requirements-dev.txt && \
+          conda create --name TEST python=${Python:2:1}.${Python:3:1} --file requirements.txt --file requirements-dev.txt && \
           source activate TEST && \
           #CYTHON_COVERAGE=1 pip install -v -e  . --no-deps --force-reinstall && \
           pip install -v -e  . --no-deps --force-reinstall && \
