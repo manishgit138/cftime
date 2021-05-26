@@ -87,13 +87,13 @@ jobs:
         #rm -f docs/build/html/.buildinfo
         #sh ./ci/deploy_docs.sh
   run_aarch64:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     name: Build on ${{ matrix.distro }} ${{ matrix.arch }}
     strategy:
       matrix:
         include:
           - arch: aarch64
-            distro: ubuntu-latest
+            distro: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2.1.0
       - uses: uraimo/run-on-arch-action@v2.0.5
