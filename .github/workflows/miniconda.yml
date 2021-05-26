@@ -126,3 +126,5 @@ jobs:
                 ;;
             esac
           run: uname -m
+      - name: Setup Conda
+        run: uname -m
