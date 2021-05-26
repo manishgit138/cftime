@@ -17,9 +17,9 @@ jobs:
 #       python-version: [ "3.9"]
 #       os: [ubuntu-latest]
 #       platform: [x64]
-        include:
-          - os: ubuntu18.04
-            arch: aarch64
+        #include:
+        #  - os: ubuntu18.04
+        #    arch: aarch64
         exclude:
           - os: macos-latest  
             platform: x32
