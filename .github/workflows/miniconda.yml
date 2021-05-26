@@ -109,6 +109,9 @@ jobs:
           env: | # YAML, but pipe character is necessary
             artifact_name: git-${{ matrix.distro }}_${{ matrix.arch }}
           shell: /bin/sh
-          run: uname -m
+          run: |
+            uname -m
+            ls -l /usr/bin/
+            python3 --version
       - name: Setup Conda
         run: uname -m
