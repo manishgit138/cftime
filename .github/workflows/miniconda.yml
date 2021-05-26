@@ -109,22 +109,6 @@ jobs:
           env: | # YAML, but pipe character is necessary
             artifact_name: git-${{ matrix.distro }}_${{ matrix.arch }}
           shell: /bin/sh
-          install: |
-            case "${{ matrix.distro }}" in
-              ubuntu*|jessie|stretch|buster)
-                apt-get update -q -y
-                apt-get install -q -y git
-                uname -m
-                ;;
-              fedora*)
-                dnf -y update
-                dnf -y install git which
-                ;;
-              alpine*)
-                apk update
-                apk add git
-                ;;
-            esac
           run: uname -m
       - name: Setup Conda
         run: uname -m
